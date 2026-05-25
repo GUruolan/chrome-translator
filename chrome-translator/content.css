@@ -26,12 +26,12 @@
   display: flex !important;
   align-items: center !important;
   justify-content: space-between !important;
-  padding: 10px 14px !important;
+  padding: 6px 10px !important;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
 }
 
 #__tb__ .__tb_label__ {
-  font-size: 12px !important;
+  font-size: 11px !important;
   font-weight: 600 !important;
   color: #ffffff !important;
   letter-spacing: 0.3px !important;
@@ -42,9 +42,9 @@
   border: none !important;
   color: #ffffff !important;
   cursor: pointer !important;
-  font-size: 11px !important;
-  width: 22px !important;
-  height: 22px !important;
+  font-size: 10px !important;
+  width: 18px !important;
+  height: 18px !important;
   border-radius: 50% !important;
   display: flex !important;
   align-items: center !important;

@@ -37,15 +37,37 @@
     }
   }
 
+  // 按自然断句切块，每块 ≤ 490 字符（MyMemory 上限 500）
+  function splitChunks(text, max = 490) {
+    if (text.length <= max) return [text];
+    const chunks = [];
+    let i = 0;
+    while (i < text.length) {
+      if (i + max >= text.length) { chunks.push(text.slice(i)); break; }
+      let end = i + max;
+      // 向前找空格或标点作为断点
+      while (end > i + max / 2 && !/[\s\.,;!?。，；！？]/.test(text[end])) end--;
+      if (end === i + max / 2) end = i + max; // 找不到断点就硬切
+      chunks.push(text.slice(i, end).trim());
+      i = end;
+      while (i < text.length && text[i] === ' ') i++; // 跳过开头空格
+    }
+    return chunks.filter(Boolean);
+  }
+
   async function translateMyMemory(text, sl, tl, email) {
     const pair = `${sl === 'auto' ? 'autodetect' : sl}|${tl}`;
-    let url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${encodeURIComponent(pair)}`;
-    if (email) url += `&de=${encodeURIComponent(email)}`;
-    const r = await fetch(url);
-    if (!r.ok) throw new Error(`HTTP ${r.status}`);
-    const d = await r.json();
-    if (d.responseStatus !== 200) throw new Error(d.responseDetails || '翻译失败');
-    return d.responseData.translatedText;
+    const chunks = splitChunks(text);
+    const results = await Promise.all(chunks.map(async chunk => {
+      let url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(chunk)}&langpair=${encodeURIComponent(pair)}`;
+      if (email) url += `&de=${encodeURIComponent(email)}`;
+      const r = await fetch(url);
+      if (!r.ok) throw new Error(`HTTP ${r.status}`);
+      const d = await r.json();
+      if (d.responseStatus !== 200) throw new Error(d.responseDetails || '翻译失败');
+      return d.responseData.translatedText;
+    }));
+    return results.join(' ');
   }
 
   async function translateGoogle(text, sl, tl) {

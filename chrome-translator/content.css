@@ -15,6 +15,7 @@
   pointer-events: all !important;
   animation: __tb_dot_in__ 0.12s ease !important;
   user-select: none !important;
+  transition: transform 0.15s ease, box-shadow 0.15s ease !important;
 }
 
 #__tb_dot__::after {
@@ -23,7 +24,7 @@
 }
 
 #__tb_dot__:hover {
-  transform: scale(1.15) !important;
+  transform: scale(1.18) !important;
   box-shadow: 0 4px 12px rgba(102, 126, 234, 0.65) !important;
 }
 
@@ -102,8 +103,8 @@
 
 /* 内容区 */
 #__tb__ .__tb_body__ {
-  padding: 14px 16px !important;
-  min-height: 56px !important;
+  padding: 12px 14px !important;
+  min-height: 40px !important;
   max-height: 220px !important;
   overflow-y: auto !important;
 }
@@ -138,6 +139,11 @@
   to { transform: rotate(360deg); }
 }
 
+@keyframes __tb_fade__ {
+  from { opacity: 0; transform: translateY(3px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 /* 翻译结果 */
 #__tb__ .__tb_text__ {
   display: none !important;
@@ -145,6 +151,7 @@
   color: #1e293b !important;
   line-height: 1.75 !important;
   word-break: break-word !important;
+  animation: __tb_fade__ 0.2s ease !important;
 }
 
 /* 错误 */
@@ -153,5 +160,6 @@
   font-size: 13px !important;
   color: #ef4444 !important;
   line-height: 1.5 !important;
+  animation: __tb_fade__ 0.2s ease !important;
 }
 

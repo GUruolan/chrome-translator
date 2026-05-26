@@ -1,3 +1,37 @@
+/* 小圆点触发器 */
+#__tb_dot__ {
+  position: fixed !important;
+  z-index: 2147483646 !important;
+  width: 18px !important;
+  height: 18px !important;
+  border-radius: 50% !important;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  box-shadow: 0 2px 6px rgba(102, 126, 234, 0.5) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  line-height: 1 !important;
+  pointer-events: all !important;
+  animation: __tb_dot_in__ 0.12s ease !important;
+  user-select: none !important;
+}
+
+#__tb_dot__::after {
+  content: '🌐' !important;
+  font-size: 11px !important;
+}
+
+#__tb_dot__:hover {
+  transform: scale(1.15) !important;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.65) !important;
+}
+
+@keyframes __tb_dot_in__ {
+  from { opacity: 0; transform: scale(0.5); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
 /* 翻译气泡 — 高特异性选择器避免被页面样式污染 */
 
 #__tb__ {
@@ -37,14 +71,21 @@
   letter-spacing: 0.3px !important;
 }
 
+#__tb__ .__tb_actions__ {
+  display: flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+}
+
+#__tb__ .__tb_copy__,
 #__tb__ .__tb_x__ {
   background: rgba(255, 255, 255, 0.2) !important;
   border: none !important;
   color: #ffffff !important;
   cursor: pointer !important;
-  font-size: 10px !important;
-  width: 18px !important;
-  height: 18px !important;
+  font-size: 11px !important;
+  width: 20px !important;
+  height: 20px !important;
   border-radius: 50% !important;
   display: flex !important;
   align-items: center !important;
@@ -54,6 +95,7 @@
   transition: background 0.15s !important;
 }
 
+#__tb__ .__tb_copy__:hover,
 #__tb__ .__tb_x__:hover {
   background: rgba(255, 255, 255, 0.4) !important;
 }
@@ -113,29 +155,3 @@
   line-height: 1.5 !important;
 }
 
-/* 底栏 */
-#__tb__ .__tb_foot__ {
-  display: none !important;
-  justify-content: flex-end !important;
-  padding: 8px 12px !important;
-  background: #f8fafc !important;
-  border-top: 1px solid #f1f5f9 !important;
-}
-
-#__tb__ .__tb_copy__ {
-  background: none !important;
-  border: 1px solid #e2e8f0 !important;
-  color: #667eea !important;
-  font-size: 12px !important;
-  padding: 4px 12px !important;
-  border-radius: 6px !important;
-  cursor: pointer !important;
-  font-family: inherit !important;
-  transition: all 0.15s !important;
-}
-
-#__tb__ .__tb_copy__:hover {
-  background: #667eea !important;
-  color: #ffffff !important;
-  border-color: #667eea !important;
-}
